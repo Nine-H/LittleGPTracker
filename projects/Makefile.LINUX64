@@ -1,0 +1,33 @@
+-include $(PWD)/base_rules
+%.x64: $(OFILES)
+	$(CXX) $(LDFLAGS) $@ $(OFILES) $(LIBS)
+
+LINUX64DIRS := \
+	../sources/Adapters/Dummy/Midi \
+	../sources/Adapters/LINUX64/Main \
+	../sources/Adapters/LINUX64/System \
+	../sources/Adapters/Unix/FileSystem \
+	../sources/Adapters/Unix/Process \
+	../sources/Adapters/SDL/Audio \
+	../sources/Adapters/SDL/Process \
+	../sources/Adapters/SDL/GUI \
+	../sources/Adapters/SDL/Timer \
+	../sources/System/Process \
+
+LINUX64FILES := \
+	DummyMidi.o GUIFactory.o LinuxMain.o LinuxSystem.o Process.o SDLAudio.o \
+	SDLAudioDriver.o SDLEventManager.o SDLGUIWindowImp.o SDLProcess.o SDLTimer.o \
+	UnixFileSystem.o \
+
+DEFINES := -DCPP_MEMORY
+INCLUDES := -I$(PWD)/../sources
+OPT_FLAGS = -O3 -Ofast
+CFLAGS := $(DEFINES) $(INCLUDES) $(OPT_FLAGS)
+CXXFLAGS := $(CFLAGS) -fpermissive -std=gnu++03
+
+LIBS := -lSDL -lpthread # -lSDL_mixer
+LIBDIRS := /usr/lib64
+LIBDIRS += /usr/include
+
+EXTENSION := x64
+TARGET = lgpt.x64

@@ -586,6 +586,9 @@ $(OUTPUT).deb-exe	:	$(OFILES)
 $(OUTPUT).beagle-exe	:	$(OFILES)
 	$(LD) $(LDFLAGS) -o $@ $(OFILES) $(LIBS)
 
+$(OUTPUT).x64	:	$(OFILES)
+	$(LD) $(LDFLAGS) -o $@ $(OFILES) $(LIBS)
+
 
 -include $(DEPENDS)
 
