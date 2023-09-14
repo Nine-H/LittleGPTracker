@@ -1,6 +1,6 @@
 #include "LinuxSystem.h"
+#include "Adapters/Dummy/Audio/DummyAudio.h"
 #include "Adapters/Dummy/Midi/DummyMidi.h"
-#include "Adapters/SDL/Audio/SDLAudio.h"
 #include "Adapters/SDL/GUI/GUIFactory.h"
 #include "Adapters/SDL/GUI/SDLEventManager.h"
 #include "Adapters/SDL/GUI/SDLGUIWindowImp.h"
@@ -10,11 +10,13 @@
 #include "System/Console/Logger.h"
 #include <malloc.h>
 
+//#include "Adapters/SDL/Audio/SDLAudio.h"
+
 EventManager *LinuxSystem::eventManager_ = NULL;
 
 
 void LinuxSystem::AddUserLog(const char *msg) {
-	fprintf(stderr,"LOG: %s\n",msg) ;
+  fprintf(stderr,"LOG: %s\n",msg) ;
 };
 
 
@@ -39,7 +41,9 @@ void LinuxSystem::Boot(int argc,char **argv) {
   AudioSettings hint;
   hint.bufferSize_ = 1024;
   hint.preBufferCount_ = 8;
-  Audio::Install(new SDLAudio(hint));
+  Audio::Install(new DummyAudio(hint));
+
+  //Audio::Install(new SDLAudio(hint));
 
   // install midi
   MidiService::Install(new DummyMidi());
@@ -62,9 +66,9 @@ void LinuxSystem::Free(void *ptr) {
 };
 
 
-//int LinuxSystem::GetBatteryLevel() {
-//  return -1;
-//}
+int LinuxSystem::GetBatteryLevel() {
+  return -1;
+}
 
 
 unsigned long LinuxSystem::GetClock() {
@@ -99,7 +103,9 @@ void *LinuxSystem::Memcpy(void *s1, const void *s2, int n) {
 };
 
 
-void LinuxSystem::PostQuitMessage() {};
+void LinuxSystem::PostQuitMessage() {
+	SDLEventManager::GetInstance() -> PostQuitMessage() ;
+};
 
 
 void LinuxSystem::ShutDown() {};

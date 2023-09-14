@@ -15,8 +15,8 @@ class LinuxSystem: public System {
     virtual void Free(void *);
     virtual void Memset(void *addr,char val,int size);
     virtual void *Memcpy(void *s1, const void *s2, int n);
-    virtual void AddUserLog(const char *) ;
-    virtual int GetBatteryLevel() { return -1; };
+    virtual void AddUserLog(const char *);
+    virtual int GetBatteryLevel();
     virtual void PostQuitMessage();
     virtual unsigned int GetMemoryUsage();
 

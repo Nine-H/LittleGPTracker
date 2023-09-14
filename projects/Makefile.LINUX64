@@ -3,6 +3,7 @@
 	$(CXX) $(LDFLAGS) $@ $(OFILES) $(LIBS)
 
 LINUX64DIRS := \
+	../sources/Adapters/Dummy/Audio \
 	../sources/Adapters/Dummy/Midi \
 	../sources/Adapters/LINUX64/Main \
 	../sources/Adapters/LINUX64/System \
@@ -15,17 +16,18 @@ LINUX64DIRS := \
 	../sources/System/Process \
 
 LINUX64FILES := \
-	DummyMidi.o GUIFactory.o LinuxMain.o LinuxSystem.o Process.o SDLAudio.o \
-	SDLAudioDriver.o SDLEventManager.o SDLGUIWindowImp.o SDLProcess.o SDLTimer.o \
-	UnixFileSystem.o \
+	DummyAudio.o DummyAudioDriver.o DummyMidi.o \
+	GUIFactory.o LinuxMain.o LinuxSystem.o Process.o \
+	SDLAudio.o SDLAudioDriver.o SDLEventManager.o \
+	SDLGUIWindowImp.o SDLProcess.o SDLTimer.o UnixFileSystem.o \
 
 DEFINES := -DCPP_MEMORY
 INCLUDES := -I$(PWD)/../sources
-OPT_FLAGS = -O3 -Ofast
+OPT_FLAGS = -O3 -Ofast -g3
 CFLAGS := $(DEFINES) $(INCLUDES) $(OPT_FLAGS)
 CXXFLAGS := $(CFLAGS) -fpermissive -std=gnu++03
 
-LIBS := -lSDL -lpthread # -lSDL_mixer
+LIBS := -lSDL -lpthread #-lSDL_mixer
 LIBDIRS := /usr/lib64
 LIBDIRS += /usr/include
 
