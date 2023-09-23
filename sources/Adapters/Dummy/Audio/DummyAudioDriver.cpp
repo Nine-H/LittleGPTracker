@@ -8,12 +8,12 @@ void DummyAudioDriver::CloseDriver() {};
 
 
 int DummyAudioDriver::GetPlayedBufferPercentage() {
-	return 0;
+  return 0;
 };
 
 
 int DummyAudioDriver::GetSampleRate() {
-	return 44100;
+  return 44100;
 };
 
 

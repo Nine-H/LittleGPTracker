@@ -158,7 +158,7 @@ void SDLAudioDriver::OnChunkDone(Uint8 *stream,int len) {
              bufferPos_=0 ;
          } else {
 
-			memcpy(mainBuffer_+bufferSize_-bufferPos_, pool_[poolPlayPosition_].buffer_,pool_[poolPlayPosition_].size_);
+			SYS_MEMCPY(mainBuffer_+bufferSize_-bufferPos_, pool_[poolPlayPosition_].buffer_,pool_[poolPlayPosition_].size_);
     
              // Adapt buffer variables
     
