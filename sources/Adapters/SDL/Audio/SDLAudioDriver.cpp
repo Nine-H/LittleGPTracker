@@ -159,8 +159,8 @@ void SDLAudioDriver::OnChunkDone(Uint8 *stream,int len) {
       );
 
       // Adapt buffer variables
-      bufferSize_=bufferSize_-bufferPos_+pool_[poolPlayPosition_].size_ ;
-      bufferPos_=0 ;
+      bufferSize_ = bufferSize_ - bufferPos_ + pool_[poolPlayPosition_].size_;
+      bufferPos_ = 0;
 
       free(pool_[poolPlayPosition_].buffer_);
 
@@ -173,9 +173,9 @@ void SDLAudioDriver::OnChunkDone(Uint8 *stream,int len) {
   }
 
   // Now dump audio to the device
-  SYS_MEMCPY(stream,(short *)(mainBuffer_+bufferPos_), len); 
+  SYS_MEMCPY(stream, (short *)(mainBuffer_ + bufferPos_), len);
   onAudioBufferTick();
-  bufferPos_+=len ;
+  bufferPos_ += len;
 }
 
 int SDLAudioDriver::GetPlayedBufferPercentage() {
