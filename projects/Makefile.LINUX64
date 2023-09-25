@@ -21,7 +21,7 @@ LINUX64FILES := \
 	SDLAudio.o SDLAudioDriver.o SDLEventManager.o \
 	SDLGUIWindowImp.o SDLProcess.o SDLTimer.o UnixFileSystem.o \
 
-DEFINES := -DCPP_MEMORY
+DEFINES := -DUSE_SDLAUDIO -DCPP_MEMORY
 INCLUDES := -I$(PWD)/../sources
 OPT_FLAGS = -O3 -Ofast -g3
 CFLAGS := $(DEFINES) $(INCLUDES) $(OPT_FLAGS)

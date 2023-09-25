@@ -10,7 +10,9 @@
 #include "System/Console/Logger.h"
 #include <malloc.h>
 
-//#include "Adapters/SDL/Audio/SDLAudio.h"
+#ifdef USE_SDLAUDIO
+#include "Adapters/SDL/Audio/SDLAudio.h"
+#endif
 
 EventManager *LinuxSystem::eventManager_ = NULL;
 
@@ -43,7 +45,9 @@ void LinuxSystem::Boot(int argc,char **argv) {
   hint.preBufferCount_ = 8;
   Audio::Install(new DummyAudio(hint));
 
-  //Audio::Install(new SDLAudio(hint));
+  #ifdef USE_SDLAUDIO
+  Audio::Install(new SDLAudio(hint));
+  #endif
 
   // install midi
   MidiService::Install(new DummyMidi());
