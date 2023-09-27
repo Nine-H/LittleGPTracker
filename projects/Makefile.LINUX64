@@ -5,6 +5,8 @@
 LINUX64DIRS := \
 	../sources/Adapters/Dummy/Audio \
 	../sources/Adapters/Dummy/Midi \
+	../sources/Adapters/Jack/Audio \
+	../sources/Adapters/Jack/Client \
 	../sources/Adapters/LINUX64/Main \
 	../sources/Adapters/LINUX64/System \
 	../sources/Adapters/Unix/FileSystem \
@@ -20,14 +22,15 @@ LINUX64FILES := \
 	GUIFactory.o LinuxMain.o LinuxSystem.o Process.o \
 	SDLAudio.o SDLAudioDriver.o SDLEventManager.o \
 	SDLGUIWindowImp.o SDLProcess.o SDLTimer.o UnixFileSystem.o \
+	JackAudio.o JackAudioDriver.o JackClient.o\
 
-DEFINES := -DUSE_SDLAUDIO -DCPP_MEMORY
+DEFINES := -DUSE_JACKAUDIO -DUSE_SDLAUDIO -DCPP_MEMORY
 INCLUDES := -I$(PWD)/../sources
 OPT_FLAGS = -O3 -Ofast -g3
 CFLAGS := $(DEFINES) $(INCLUDES) $(OPT_FLAGS)
 CXXFLAGS := $(CFLAGS) -fpermissive -std=gnu++03
 
-LIBS := -lSDL -lpthread #-lSDL_mixer
+LIBS := -lSDL -lpthread -ljack #-lSDL_mixer
 LIBDIRS := /usr/lib64
 LIBDIRS += /usr/include
 

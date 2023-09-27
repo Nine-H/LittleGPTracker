@@ -10,6 +10,10 @@
 #include "System/Console/Logger.h"
 #include <malloc.h>
 
+#ifdef USE_JACKAUDIO
+#include "Adapters/Jack/Audio/JackAudio.h"
+#endif
+
 #ifdef USE_SDLAUDIO
 #include "Adapters/SDL/Audio/SDLAudio.h"
 #endif
@@ -44,6 +48,10 @@ void LinuxSystem::Boot(int argc,char **argv) {
   hint.bufferSize_ = 1024;
   hint.preBufferCount_ = 8;
   Audio::Install(new DummyAudio(hint));
+
+  #ifdef USE_JACKAUDIO
+  Audio::Install(new JackAudio(hint));
+  #endif
 
   #ifdef USE_SDLAUDIO
   Audio::Install(new SDLAudio(hint));
